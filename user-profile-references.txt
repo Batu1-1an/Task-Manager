@@ -1,0 +1,2 @@
+717:    const userProfile = document.querySelector('.user-profile');
+778:    document.querySelectorAll('.user-profile, .user-name, .user-avatar').forEach(element => {

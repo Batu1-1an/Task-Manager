@@ -1,0 +1,2004 @@
+:root {
+    /* Notion-inspired color palette */
+    --notion-bg: #ffffff; /* Main background */
+    --notion-bg-gray: #f7f6f3; /* Light gray background */
+    --notion-bg-hover: #f1f1ef; /* Background for hover states */
+    --notion-text: #37352f; /* Main text color */
+    --notion-text-gray: #787774; /* Secondary text */
+    --notion-blue: #2382fe; /* Primary blue accent */
+    --notion-blue-hover: #1a73e8; /* Darker blue for hover */
+    --notion-border: #e1e0df; /* Subtle border color */
+    --notion-red: #e03e3e; /* Red for error/delete/high priority */
+    --notion-yellow: #dfab01; /* Yellow for medium priority */
+    --notion-green: #0f7b6c; /* Green for low priority/success */
+    --notion-sidebar-bg: #fbfbfa; /* Sidebar background */
+    --notion-sidebar-text: #44433E; /* Sidebar text */
+    --notion-sidebar-hover: #efefed; /* Sidebar hover state */
+    --notion-box-shadow: rgba(15, 15, 15, 0.05); /* Subtle shadow */
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--notion-bg);
+    color: var(--notion-text);
+    line-height: 1.5;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Signup Form - Modern, Appealing Style */
+#signup-form {
+    background: linear-gradient(135deg, var(--notion-bg-gray) 60%, #e3ecfb 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 32px 0 rgba(41, 128, 185, 0.10), 0 1.5px 6px 0 var(--notion-box-shadow);
+    padding: 40px 32px 32px 32px;
+    max-width: 350px;
+    margin: 48px auto;
+    border: 1.5px solid var(--notion-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+#signup-form h2 {
+    margin-bottom: 12px;
+    color: var(--notion-blue);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 2rem;
+}
+#signup-form .notion-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--notion-border);
+    background: #fff;
+    font-size: 1.08rem;
+    margin-bottom: 10px;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1.5px 6px 0 rgba(41, 128, 185, 0.04);
+}
+#signup-form .notion-input:focus {
+    outline: none;
+    border: 1.5px solid var(--notion-blue);
+    box-shadow: 0 2px 8px 0 rgba(41, 128, 185, 0.12);
+}
+#signup-form .notion-button.primary {
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 8px;
+    background: linear-gradient(90deg, var(--notion-blue) 70%, var(--notion-blue-hover) 100%);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    box-shadow: 0 2px 8px 0 rgba(41, 128, 185, 0.08);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+#signup-form .notion-button.primary:hover {
+    background: linear-gradient(90deg, var(--notion-blue-hover) 70%, var(--notion-blue) 100%);
+    transform: translateY(-2px) scale(1.03);
+}
+#signup-form p {
+    margin-top: 10px;
+    color: var(--notion-text-gray);
+    font-size: 0.98rem;
+}
+#signup-form a {
+    color: var(--notion-blue);
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+#signup-form a:hover {
+    color: var(--notion-blue-hover);
+}
+
+/* Notion Layout Structure */
+.notion-layout {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar Styles */
+.notion-sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: var(--notion-sidebar-bg);
+    border-right: 1px solid var(--notion-border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+    transition: width 0.3s ease;
+}
+
+/* Collapsed sidebar */
+.notion-sidebar.collapsed {
+    width: 50px;
+}
+
+.notion-sidebar.collapsed .sidebar-section-header span,
+.notion-sidebar.collapsed .sidebar-item span,
+.notion-sidebar.collapsed .workspace-name,
+.notion-sidebar.collapsed .sidebar-search input,
+.notion-sidebar.collapsed .user-name {
+    display: none;
+}
+
+.notion-sidebar.collapsed .sidebar-search {
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.notion-sidebar.collapsed .sidebar-item {
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.notion-sidebar.collapsed .user-profile {
+    justify-content: center;
+}
+
+/* Layout with collapsed sidebar */
+.notion-layout.sidebar-collapsed .notion-content {
+    margin-left: 50px;
+    width: calc(100% - 50px);
+}
+
+.sidebar-header {
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--notion-border);
+}
+
+.workspace-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--notion-text);
+}
+
+.sidebar-collapse-btn {
+    background: none;
+    border: none;
+    color: var(--notion-text-gray);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-collapse-btn:hover {
+    background-color: var(--notion-sidebar-hover);
+}
+
+.sidebar-search {
+    margin: 12px 10px;
+    position: relative;
+}
+
+.sidebar-search input {
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--notion-bg-hover);
+    color: var(--notion-text);
+    font-size: 14px;
+    outline: none;
+}
+
+.sidebar-search input:focus {
+    box-shadow: 0 0 0 2px var(--primary-focus-shadow);
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    padding: 4px 0;
+}
+
+.sidebar-section-header {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--notion-text-gray);
+    letter-spacing: 0.5px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    color: var(--notion-sidebar-text);
+    border-radius: 4px;
+    margin: 1px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-item:hover {
+    background-color: var(--notion-sidebar-hover);
+}
+
+.sidebar-item i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.sidebar-item:hover {
+    background-color: var(--notion-sidebar-hover);
+}
+
+.sidebar-item.active {
+    background-color: var(--notion-bg-hover);
+    font-weight: 500;
+}
+
+.sidebar-footer {
+    padding: 12px 14px;
+    border-top: 1px solid var(--notion-border);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    color: var(--notion-text);
+}
+
+.user-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background-color: var(--notion-blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.user-name {
+    font-size: 14px;
+}
+
+/* Rich/* Quill Editor Notion Style */
+.editor-block {
+    border: 1px solid var(--notion-border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.editor-title {
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: var(--light-color); /* Use light color for title text */
+    font-weight: 500;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.details-indicator {
+    margin-left: 5px;
+    font-size: 0.9em;
+    opacity: 0.7;
+    cursor: pointer;
+    color: var(--text-color); /* Ensure indicator color is readable */
+}
+
+#editor-container {
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color); /* Use border-color */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ql-toolbar.ql-snow {
+    border: none !important;
+    border-bottom: 1px solid var(--border-color) !important; /* Use border-color */
+    background-color: var(--secondary-color); /* Use secondary color for toolbar */
+    padding: 12px !important;
+}
+
+.ql-container.ql-snow {
+    border: none !important;
+    background-color: var(--light-color); /* Use light color for editor background */
+    min-height: 120px;
+}
+
+.ql-editor {
+    min-height: 120px;
+    font-family: 'Arial', sans-serif; /* Use consistent font */
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: 15px !important;
+}
+
+.editor-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 12px;
+    background-color: var(--secondary-color); /* Use secondary color for actions background */
+    border-top: 1px solid var(--border-color); /* Use border-color */
+}
+
+.editor-actions button {
+    padding: 5px 10px;
+    margin-left: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--light-color);
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.editor-actions button.save {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-color: var(--primary-hover);
+}
+
+.editor-actions button:hover {
+    background-color: var(--primary-hover);
+    color: var(--light-color);
+}
+
+/* Task Details Section */
+/* Main Content Area */
+.notion-content {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: var(--notion-bg);
+    padding: 0;
+}
+
+.content-header {
+    padding: 24px 96px 0 96px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-icon {
+    font-size: 28px;
+    color: var(--notion-text);
+    display: flex;
+    align-items: center;
+}
+
+.content-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--notion-text);
+    margin: 0;
+    text-align: left;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notion-content-views {
+    padding: 0 96px 96px 96px;
+}
+
+/* Notion UI Components */
+.notion-button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.1s ease;
+}
+
+.notion-button i {
+    font-size: 16px;
+}
+
+.notion-button.primary {
+    background-color: var(--notion-blue);
+    color: white;
+    border: none;
+}
+
+.notion-button.primary:hover {
+    background-color: var(--notion-blue-hover);
+}
+
+.notion-button.secondary {
+    background-color: var(--notion-bg-hover);
+    color: var(--notion-text);
+    border: 1px solid var(--notion-border);
+}
+
+.notion-button.secondary:hover {
+    background-color: #e9e9e7;
+}
+
+.notion-button.small {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.notion-view {
+    display: none;
+}
+
+.notion-view.active {
+    display: block;
+}
+
+/* Notion Block & List Styling */
+.notion-block {
+    margin-bottom: 12px;
+    border-radius: 4px;
+    background-color: var(--notion-bg);
+}
+
+.notion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Task Details Section - Notion style */
+.task-details {
+    margin-top: 5px;
+    padding: 12px 14px;
+    background-color: var(--notion-bg-gray);
+    border-radius: 4px;
+    font-size: 14px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.task-details.expanded {
+    max-height: 500px;
+    opacity: 1;
+
+/* User Profile Settings Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top (Increased z-index) */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(255, 0, 0, 0.7); /* Bright red background for debugging */
+    backdrop-filter: blur(5px); /* Optional: blur background */
+    -webkit-backdrop-filter: blur(5px); /* Safari support */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+.modal.visible {
+    display: flex !important; /* Show when visible, override other display rules */
+}
+
+.modal-content {
+    background-color: var(--notion-bg);
+    margin: auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--notion-text);
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.modal .input-group {
+    margin-bottom: 0; /* Override default input-group margin */
+}
+
+.modal .notion-input {
+    width: calc(100% - 28px); /* Adjust for padding and border */
+    padding: 10px 14px;
+    border-radius: 4px;
+    border: 1px solid var(--notion-border);
+    background-color: var(--notion-bg-gray);
+    color: var(--notion-text);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.modal .notion-input:focus {
+    border-color: var(--notion-blue);
+}
+
+.modal label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--notion-text-gray);
+}
+
+.modal .notion-button {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* Input Block for Adding Tasks */
+.input-block {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--notion-border);
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--notion-text-gray);
+}
+
+.input-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-left: 26px;
+    margin-top: 8px;
+}
+
+.input-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.option-label {
+    font-size: 13px;
+    color: var(--notion-text-gray);
+}
+
+/* Notion Input Styles */
+.notion-input {
+background: transparent;
+border: 1px solid transparent;
+border-radius: 4px;
+padding: 8px 10px;
+font-size: 14px;
+font-family: inherit;
+color: var(--notion-text);
+width: 100%;
+outline: none;
+}
+
+.notion-input:focus, .notion-input:hover {
+border-color: var(--notion-border);
+background-color: var(--notion-bg);
+}
+
+.notion-input.date {
+    width: auto;
+}
+
+.notion-input::placeholder {
+    color: var(--notion-text-gray);
+    opacity: 0.7;
+}
+
+.notion-select {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--notion-text);
+    cursor: pointer;
+    outline: none;
+}
+
+.notion-select:focus, .notion-select:hover {
+    border-color: var(--notion-border);
+    background-color: var(--notion-bg);
+}
+
+input[type="text"],
+select,
+input[type="date"] {
+    flex-grow: 1;
+    padding: 10px 12px; /* Adjusted padding */
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Adjusted border-radius */
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Adjusted inset shadow */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    color: var(--text-color); /* Ensure text color is consistent */
+    background-color: var(--light-color); /* Ensure background is light */
+}
+
+input[type="text"]:focus,
+select:focus,
+input[type="date"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(52, 152, 219, 0.2); /* Updated focus shadow */
+}
+
+/* Target the specific add button */
+#addButton {
+    padding: 10px 20px; /* Adjusted padding */
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    border-radius: 6px; /* Adjusted border-radius */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
+}
+
+#addButton:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* Adjusted shadow on hover */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Notion-style List Items */
+.notion-list li {
+    padding: 8px 4px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--notion-border);
+    border-radius: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.15s ease;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.notion-list li:hover {
+    background-color: var(--notion-bg-hover);
+}
+
+.notion-list .todo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    padding: 4px 0;
+}
+
+.notion-list .task-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--notion-text);
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+/* Legacy list styling for views that haven't been converted yet */
+li:not(.notion-list li) {
+    background-color: var(--notion-bg);
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border: 1px solid var(--notion-border);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 1px 3px var(--notion-box-shadow);
+}
+
+li:hover {
+    background-color: var(--secondary-color); /* Use secondary color on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Adjusted shadow on hover */
+}
+
+li.completed {
+    background-color: var(--completed-bg);
+    border-color: var(--completed-bg);
+}
+
+li.completed span {
+    text-decoration: line-through;
+    color: var(--completed-text);
+}
+
+li .task-text {
+    flex-grow: 1;
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: var(--danger-color);
+    color: var(--light-color);
+    border: none;
+    padding: 8px 16px; /* Increased padding */
+    border-radius: 8px; /* Increased border-radius */
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(51, 78, 104, 0.08); /* Added subtle shadow */
+}
+
+.delete-button:hover {
+    background-color: var(--danger-hover);
+    box-shadow: 0 2px 5px rgba(51, 78, 104, 0.1); /* Slightly larger shadow on hover */
+}
+
+/* Add styles for editing state */
+li.editing {
+    background-color: #fff9e6; /* Lighter yellow background */
+    border-color: #ffe0a5; /* Lighter orange border */
+}
+
+/* Style for the edit input field */
+.edit-input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(51, 78, 104, 0.05); /* More subtle inset shadow */
+    margin: 0 15px;
+}
+/* Integrated Notes Styling */
+.toggle-notes-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color); /* Changed text color for better contrast */
+    border: none;
+    padding: 8px 16px; /* Increased padding */
+    border-radius: 8px; /* Increased border-radius */
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+    margin-left: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(51, 78, 104, 0.08); /* Added subtle shadow */
+}
+
+.toggle-notes-button:hover {
+    background-color: #8cb5d9; /* Slightly darker secondary on hover */
+    box-shadow: 0 2px 5px rgba(51, 78, 104, 0.1); /* Slightly larger shadow on hover */
+}
+
+.notes-area {
+    margin-top: 20px; /* Increased top margin */
+    padding-top: 20px; /* Increased top padding */
+    border-top: 1px solid var(--border-color);
+}
+
+.notes-area .input-container {
+    display: flex;
+    gap: 15px; /* Increased gap */
+    margin-bottom: 20px; /* Increased bottom margin */
+    align-items: flex-start;
+}
+
+.notes-area .note-input {
+    flex-grow: 1;
+    padding: 10px 12px; /* Increased padding */
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Increased border-radius */
+    font-size: 0.9rem;
+    box-shadow: inset 0 1px 3px rgba(51, 78, 104, 0.05); /* More subtle inset shadow */
+    min-height: 80px; /* Increased min-height */
+    resize: vertical;
+}
+
+.notes-area .save-note-button {
+    padding: 10px 20px; /* Increased padding */
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    border-radius: 8px; /* Increased border-radius */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(51, 78, 104, 0.08); /* Added subtle shadow */
+}
+
+.notes-area .save-note-button:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 2px 5px rgba(51, 78, 104, 0.1); /* Slightly larger shadow on hover */
+}
+
+.todo-notes-list {
+    margin-top: 15px; /* Increased top margin */
+}
+
+.todo-notes-list .note-item {
+    background-color: #eef2f7; /* Lighter background for notes */
+    padding: 12px 15px; /* Increased padding */
+    margin-bottom: 10px; /* Increased margin */
+    border: 1px solid #d9e2ec; /* Lighter border */
+    border-radius: 8px; /* Increased border-radius */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    word-break: break-word;
+    white-space: pre-wrap;
+    box-shadow: 0 1px 3px rgba(51, 78, 104, 0.05); /* Added subtle shadow */
+}
+
+.todo-notes-list .note-item span {
+    flex-grow: 1;
+    margin-right: 15px; /* Increased margin */
+    font-size: 0.95rem; /* Slightly increased font size */
+}
+
+.todo-notes-list .delete-note-button {
+    background-color: var(--danger-color);
+    color: var(--light-color);
+    border: none;
+    padding: 6px 10px; /* Increased padding */
+    border-radius: 6px; /* Increased border-radius */
+    cursor: pointer;
+    font-size: 0.85rem; /* Slightly increased font size */
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Added box-shadow transition */
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(51, 78, 104, 0.08); /* Added subtle shadow */
+}
+
+.todo-notes-list .delete-note-button:hover {
+    background-color: var(--danger-hover);
+    box-shadow: 0 2px 5px rgba(51, 78, 104, 0.1); /* Slightly larger shadow on hover */
+}
+
+/* Styles for Priority and Due Date */
+.todo-priority {
+    display: inline-block;
+    margin-left: 18px;
+    margin-right: 8px;
+    padding: 4px 12px;
+    background: linear-gradient(90deg, #f7cac9 0%, #92a8d1 100%);
+    color: #334e68;
+    font-weight: 600;
+    border-radius: 14px;
+    font-size: 0.93rem;
+    box-shadow: 0 1px 4px rgba(51, 78, 104, 0.08);
+    letter-spacing: 0.03em;
+    border: 1px solid #e0e7ef;
+    transition: background 0.2s, color 0.2s;
+}
+
+.todo-priority:hover {
+    background: linear-gradient(90deg, #f7cac9 0%, #f3e9e7 100%);
+    color: #4a9fb3;
+}
+
+.todo-due-date {
+    display: inline-block;
+    margin-left: 0;
+    margin-right: 12px;
+    padding: 4px 12px;
+    background: linear-gradient(90deg, #b5ead7 0%, #c7ceea 100%);
+    color: #334e68;
+    font-weight: 500;
+    border-radius: 14px;
+    font-size: 0.93rem;
+    box-shadow: 0 1px 4px rgba(51, 78, 104, 0.08);
+    letter-spacing: 0.02em;
+    border: 1px solid #e0e7ef;
+    transition: background 0.2s, color 0.2s;
+}
+
+.todo-due-date:hover {
+    background: linear-gradient(90deg, #b5ead7 0%, #f3e9e7 100%);
+    color: #4a9fb3;
+}
+
+.todo-priority.high {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+.todo-priority.medium {
+    color: orange;
+}
+
+.todo-priority.low {
+    color: green;
+}
+
+/* Styles for editing inputs */
+.edit-priority-input, .edit-due-date-input {
+    margin: 0 5px;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* FullCalendar Styles */
+#calendar-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Style the calendar toolbar */
+.fc .fc-toolbar {
+    margin-bottom: 1.5em;
+    color: var(--text-color); /* Ensure toolbar text uses text color */
+}
+
+/* Style the calendar buttons */
+.fc .fc-button {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none; /* Remove border */
+    border-radius: 4px; /* Slightly smaller border-radius */
+    transition: background-color 0.2s ease-in-out;
+    padding: 8px 12px; /* Adjusted padding */
+}
+
+.fc .fc-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.fc .fc-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Style the calendar day grid cells */
+.fc .fc-daygrid-day {
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color); /* Use background color for day cells */
+}
+
+.fc .fc-daygrid-day-frame {
+    padding: 5px; /* Add padding inside day cells */
+}
+
+/* Style the calendar events */
+.fc-event {
+    background-color: var(--primary-color); /* Default event color */
+    color: var(--light-color); /* Ensure event text is readable */
+    border: none; /* Remove event border */
+    border-radius: 4px; /* Rounded corners for events */
+    padding: 2px 5px; /* Adjusted event padding */
+    margin-bottom: 2px; /* Space between events */
+    font-size: 0.85rem; /* Smaller font size for events */
+}
+
+.fc-event-time {
+    font-weight: bold; /* Bold time */
+}
+
+/* Style for today's date cell */
+.fc .fc-day-today {
+    background-color: #fff9e6; /* Light yellow background for today */
+}
+
+/* Style for completed task events */
+.fc-event[style*="#e0e7ef"] { /* Targeting the color set in script.js for completed tasks */
+    background-color: var(--completed-bg) !important;
+    color: var(--completed-text) !important;
+    text-decoration: line-through;
+}
+
+/* Style for incomplete task events */
+.fc-event[style*="#62b6cb"] { /* Targeting the color set in script.js for incomplete tasks */
+    background-color: var(--primary-color) !important;
+    color: var(--light-color) !important;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    #calendar-container {
+        padding: 10px;
+    }
+
+    .fc .fc-toolbar {
+        flex-direction: column;
+    }
+
+    .fc .fc-toolbar > * {
+        margin-bottom: 10px;
+    }
+}
+
+/* Kanban Board Styles */
+#kanban-board-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* Allow horizontal scrolling if columns exceed screen width */
+    padding-bottom: 15px; /* Add some padding for the scrollbar */
+}
+
+.kanban-column {
+    flex: 1; /* Columns take equal width */
+    min-width: 250px; /* Minimum width for columns */
+    background-color: var(--completed-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Kanban Board Styles */
+#kanban-container {
+    margin-top: 20px;
+    padding: 15px; /* Added padding */
+    background-color: var(--secondary-color); /* Light background for the board area */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.kanban-board {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+    padding-bottom: 10px; /* Add some padding for the scrollbar */
+}
+
+.kanban-column {
+    flex: 0 0 280px; /* Fixed width for columns */
+    background-color: var(--bg-color); /* Background for columns */
+    border-radius: 8px; /* Rounded corners for columns */
+    padding: 15px; /* Padding inside columns */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); /* Subtle shadow for columns */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between cards */
+}
+
+.kanban-column h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--text-color); /* Column title color */
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color); /* Separator below title */
+    padding-bottom: 8px;
+}
+
+.kanban-cards {
+    flex-grow: 1; /* Cards area takes remaining space */
+    min-height: 50px; /* Ensure area is visible even with no cards */
+}
+
+.kanban-card {
+    background-color: var(--light-color); /* White background for cards */
+    border: 1px solid var(--border-color); /* Border for cards */
+    border-radius: 6px; /* Rounded corners for cards */
+    padding: 10px 15px; /* Padding inside cards */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow for cards */
+    cursor: grab; /* Indicate draggable */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    margin-bottom: 10px; /* Space between cards */
+}
+
+.kanban-card:hover {
+    transform: translateY(-3px); /* Subtle lift on hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+.kanban-card.dragging {
+    opacity: 0.5; /* Reduce opacity when dragging */
+}
+
+.kanban-card .task-text {
+    font-weight: 500; /* Make task text slightly bolder */
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.kanban-card .task-meta {
+    font-size: 0.85rem;
+    color: var(--completed-text); /* Muted color for details summary */
+    margin-top: 5px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.kanban-card .task-priority {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.kanban-card .task-priority.priority-high {
+    background-color: #f7cac9; /* Light red */
+    color: var(--danger-color);
+}
+
+.kanban-card .task-priority.priority-medium {
+    background-color: #ffe0a5; /* Light orange */
+    color: orange;
+}
+
+.kanban-card .task-priority.priority-low {
+    background-color: #b5ead7; /* Light green */
+    color: green;
+}
+
+.kanban-card .task-due-date {
+    color: var(--notion-text-gray);
+    font-size: 11px;
+}
+
+/* Styles for adding task directly to Kanban column */
+.add-task-kanban {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.add-task-kanban .add-task-input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.add-task-kanban .add-task-button {
+    padding: 8px 12px;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.add-task-kanban .add-task-button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Styles for SortableJS */
+.sortable-drag {
+    opacity: 0; /* Hide the original element while dragging */
+}
+
+.sortable-ghost {
+    background-color: #cce0ff; /* Light blue background for ghost element */
+    border: 1px dashed #62b6cb; /* Dashed border for ghost element */
+    opacity: 0.7;
+}
+
+/* AI Suggestion Area Styles */
+#ai-suggestion-area {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--completed-bg); /* Using a light background */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(51, 78, 104, 0.08);
+}
+
+#ai-suggestion-text {
+    margin-bottom: 10px;
+    font-style: italic;
+    color: var(--text-color);
+}
+
+.ai-suggestion-actions {
+    text-align: right;
+}
+
+.ai-suggestion-actions button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(51, 78, 104, 0.08);
+}
+
+#accept-suggestion-btn {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    margin-right: 10px;
+}
+
+#ai-suggest-btn {
+    background: linear-gradient(90deg, var(--primary-color) 60%, var(--primary-hover) 100%);
+    color: var(--light-color);
+    border: none;
+    border-radius: 999px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(52, 152, 219, 0.18), 0 1.5px 3px 0 var(--shadow-color);
+    cursor: pointer;
+    transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s;
+    outline: none;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin: 0 4px;
+}
+#ai-suggest-btn:hover, #ai-suggest-btn:focus {
+    background: linear-gradient(90deg, var(--primary-hover) 60%, var(--primary-color) 100%);
+    box-shadow: 0 6px 20px rgba(41, 128, 185, 0.24), 0 3px 8px 0 var(--shadow-color);
+    transform: translateY(-2px) scale(1.04);
+}
+#ai-suggest-btn:active {
+    background: linear-gradient(90deg, var(--primary-hover) 70%, var(--primary-color) 100%);
+    box-shadow: 0 2px 6px rgba(41, 128, 185, 0.16), 0 1.5px 3px 0 var(--shadow-color);
+    transform: scale(0.98);
+}
+#ai-suggest-btn::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0.7;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 999px;
+    transition: opacity 0.2s;
+}
+#ai-suggest-btn:focus-visible {
+    outline: 2px solid var(--primary-hover);
+    outline-offset: 2px;
+}
+
+#accept-suggestion-btn:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 2px 5px rgba(51, 78, 104, 0.1);
+}
+
+#reject-suggestion-btn {
+    background-color: var(--light-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+#reject-suggestion-btn:hover {
+    background-color: var(--border-color);
+    box-shadow: 0 2px 5px rgba(51, 78, 104, 0.1);
+}
+/* Templates Section Styles */
+#templates-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--light-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#templatesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.template-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(51, 78, 104, 0.05);
+}
+
+.template-item:last-child {
+    margin-bottom: 0;
+}
+
+.template-item span {
+    flex-grow: 1;
+    margin-right: 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.template-item button {
+    margin-left: 5px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.template-item button:hover {
+    opacity: 0.9;
+}
+
+.template-item button:first-of-type { /* Style for Apply button */
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+.template-item button:last-of-type { /* Style for Delete button */
+    background-color: var(--danger-color);
+    color: var(--light-color);
+}
+/* --- Goals Section Styles --- */
+
+#goals-container {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(51, 78, 104, 0.08);
+}
+
+#goals-container h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.goal-input-form {
+    display: flex; /* Changed to flex for simpler alignment */
+    gap: 10px; /* Adjusted gap */
+    margin-bottom: 20px; /* Adjusted margin */
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.goal-input-form input[type="text"],
+.goal-input-form input[type="date"] {
+    flex-grow: 1;
+    padding: 10px 12px; /* Adjusted padding */
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Adjusted border-radius */
+    font-size: 1rem; /* Adjusted font size */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Adjusted inset shadow */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    color: var(--text-color); /* Ensure text color is consistent */
+    background-color: var(--light-color); /* Ensure background is light */
+    min-width: 150px; /* Ensure a minimum width */
+}
+
+.goal-input-form input[type="text"]:focus,
+.goal-input-form input[type="date"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(52, 152, 219, 0.2); /* Updated focus shadow */
+}
+
+.goal-input-form #addGoalButton {
+    padding: 10px 20px; /* Adjusted padding */
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    border-radius: 6px; /* Adjusted border-radius */
+    cursor: pointer;
+    font-size: 1rem; /* Adjusted font size */
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
+}
+
+.goal-input-form #addGoalButton:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* Adjusted shadow on hover */
+}
+
+.goal-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(51, 78, 104, 0.06);
+}
+
+.goal-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.goal-item p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #5a6e82; /* Slightly lighter text for details */
+}
+
+.goal-progress {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.goal-progress progress {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    appearance: none; /* Override default look */
+    -webkit-appearance: none;
+}
+
+/* Style the progress bar track */
+.goal-progress progress::-webkit-progress-bar {
+    background-color: var(--border-color);
+    border-radius: 5px;
+}
+.goal-progress progress::-moz-progress-bar { /* Firefox */
+    background-color: var(--border-color);
+    border-radius: 5px;
+}
+
+/* Style the progress bar value */
+.goal-progress progress::-webkit-progress-value {
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+.goal-progress progress::-moz-progress-bar { /* Firefox */
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+
+.goal-progress span {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #5a6e82;
+}
+
+.goal-item button {
+    padding: 6px 12px;
+    margin-top: 10px;
+    margin-right: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--light-color);
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.goal-item .mark-goal-complete {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.goal-item .mark-goal-complete:hover:not(:disabled) {
+    background-color: #8cb5d9;
+}
+
+.goal-item .mark-goal-complete:disabled {
+    background-color: var(--completed-bg);
+    color: var(--completed-text);
+    cursor: not-allowed;
+    border-color: var(--completed-bg);
+}
+
+.goal-item .delete-goal {
+    background-color: var(--danger-color);
+    color: var(--light-color);
+    border-color: var(--danger-color);
+}
+
+.goal-item .delete-goal:hover {
+    background-color: var(--danger-hover);
+}
+
+/* Style for the goal select dropdown in the input container */
+#goalSelect {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-left: 10px; /* Add some space */
+}
+
+#goalSelect:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(98, 182, 203, 0.2);
+}
+/* --- Authentication Form Styles --- */
+.auth-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+/* Authentication container styles */
+.auth-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--notion-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+#auth-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+#auth-logo i {
+    font-size: 36px;
+    color: var(--notion-blue);
+    margin-bottom: 8px;
+}
+
+#auth-logo h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--notion-text);
+    margin: 0;
+}
+
+.auth-form {
+    background-color: var(--notion-bg);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+    max-width: 90%;
+    transition: all 0.3s ease;
+}
+
+.auth-form h2 {
+    text-align: center;
+    color: var(--notion-text);
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.form-description {
+    color: var(--notion-text-gray);
+    text-align: center;
+    margin: 0 0 16px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Social login buttons */
+.social-auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.social-auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--notion-border);
+    background-color: var(--notion-bg);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--notion-text);
+    transition: all 0.2s ease;
+}
+
+.social-auth-btn:hover {
+    background-color: var(--notion-bg-hover);
+}
+
+.social-auth-btn img, .social-auth-btn i {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+}
+
+.social-auth-btn.google:hover {
+    border-color: #4285F4;
+}
+
+.social-auth-btn.github {
+    color: #24292e;
+}
+
+.social-auth-btn.github:hover {
+    border-color: #24292e;
+}
+
+.social-auth-btn.github i {
+    font-size: 18px;
+}
+
+/* Or divider */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 8px 0;
+    color: var(--notion-text-gray);
+    font-size: 14px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--notion-border);
+}
+
+.auth-divider::before {
+    margin-right: 16px;
+}
+
+.auth-divider::after {
+    margin-left: 16px;
+}
+
+/* Input groups */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--notion-text);
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--notion-border);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--notion-text);
+    background-color: var(--notion-bg);
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.auth-form input[type="email"]:focus,
+.auth-form input[type="password"]:focus {
+    border-color: var(--notion-blue);
+    box-shadow: 0 0 0 2px rgba(35, 131, 226, 0.15);
+}
+
+/* Password field with toggle */
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--notion-text-gray);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+}
+
+.password-toggle:hover {
+    color: var(--notion-text);
+}
+
+/* Input error messages */
+.input-error {
+    color: var(--notion-red);
+    font-size: 12px;
+    margin-top: 2px;
+    min-height: 16px;
+}
+
+/* Password strength meter */
+.password-strength {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.strength-meter {
+    height: 4px;
+    background-color: var(--notion-border);
+    border-radius: 2px;
+    margin-bottom: 4px;
+    overflow: hidden;
+}
+
+.strength-meter-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--notion-red);
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-meter-fill.weak {
+    width: 33%;
+    background-color: var(--notion-red);
+}
+
+.strength-meter-fill.medium {
+    width: 66%;
+    background-color: var(--notion-yellow);
+}
+
+.strength-meter-fill.strong {
+    width: 100%;
+    background-color: var(--notion-green);
+}
+
+.strength-text {
+    font-size: 12px;
+    color: var(--notion-text-gray);
+    text-align: right;
+}
+
+/* Terms and conditions */
+.auth-terms {
+    font-size: 12px;
+    color: var(--notion-text-gray);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Sign-in options (remember me and forgot password) */
+.signin-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--notion-text-gray);
+}
+
+.forgot-password {
+    color: var(--notion-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Auth buttons */
+.auth-form button[type="submit"] {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    justify-content: center;
+    margin-top: 8px;
+    transition: all 0.2s ease;
+}
+
+.auth-alternative {
+    text-align: center;
+    font-size: 14px;
+    color: var(--notion-text-gray);
+    margin: 8px 0 0 0;
+}
+
+.auth-alternative a {
+    color: var(--notion-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-alternative a:hover {
+    text-decoration: underline;
+}
+
+/* Auth message box for success/error feedback */
+.auth-message {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 320px;
+    z-index: 1100;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.message-icon {
+    font-size: 24px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.message-icon.success {
+    color: var(--notion-green);
+}
+
+.message-icon.error {
+    color: var(--notion-red);
+}
+
+.message-content {
+    flex-grow: 1;
+}
+
+.message-content h3 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.message-content p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--notion-text-gray);
+}
+
+.message-close {
+    background: none;
+    border: none;
+    color: var(--notion-text-gray);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    margin-left: 8px;
+}
+
+.message-close:hover {
+    color: var(--notion-text);
+}
+
+/* Utility class to hide elements */
+.hidden {
+    display: none !important;
+}
+
+/* Hide main content when auth forms are visible */
+body.auth-active .notion-layout {
+    display: none;
+}

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion-Style Todo App</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Inter font (Notion uses this or similar sans-serif fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons for Notion-style icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Quill.js for rich text editing -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- FullCalendar for calendar view -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
+</head>
+<body>
+    <div class="notion-layout">
+        <!-- Sidebar Navigation (Notion-style) -->
+        <div class="notion-sidebar">
+            <div class="sidebar-header">
+                <span class="workspace-name">My Workspace</span>
+                <button class="sidebar-collapse-btn"><i class='bx bx-chevron-left'></i></button>
+            </div>
+            
+            <div class="sidebar-search">
+                
+                <input type="text" placeholder="Search...">
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-header">
+                        <span>WORKSPACE</span>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-item active" data-view="list">
+                            <i class='bx bx-task'></i>
+                            <span>Tasks</span>
+                        </li>
+                        <li class="sidebar-item" data-view="kanban">
+                            <i class='bx bx-columns'></i>
+                            <span>Kanban</span>
+                        </li>
+                        <li class="sidebar-item" data-view="calendar">
+                            <i class='bx bx-calendar'></i>
+                            <span>Calendar</span>
+                        </li>
+                        <li class="sidebar-item" data-view="templates">
+                            <i class='bx bx-bookmarks'></i>
+                            <span>Templates</span>
+                        </li>
+                        <li class="sidebar-item" data-view="goals">
+                            <i class='bx bx-target-lock'></i>
+                            <span>Goals</span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <span>U</span>
+                    </div>
+                    <span class="user-name">User</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="notion-content">
+            <!-- Content Header -->
+            <div class="content-header">
+                <div class="page-title">
+                    <div class="page-icon"><i class='bx bx-task'></i></div>
+                    <h1 id="content-title">Tasks</h1>
+                </div>
+                
+                <div class="header-actions">
+                    <button id="ai-suggest-btn" class="notion-button secondary">
+                        <i class='bx bx-bulb'></i>
+                        <span>Get AI Suggestion</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- AI Suggestion Area -->
+            <div id="ai-suggestion-area" class="notion-callout" style="display: none;">
+                <div class="callout-icon"><i class='bx bx-bulb'></i></div>
+                <div class="callout-content">
+                    <p id="ai-suggestion-text"></p>
+                    <div class="callout-actions">
+                        <button id="accept-suggestion-btn" class="notion-button small primary">Accept</button>
+                        <button id="reject-suggestion-btn" class="notion-button small secondary">Dismiss</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Container -->
+            <div class="notion-block input-block">
+                <div class="input-container">
+                    <div class="input-row">
+                        <div class="add-icon"><i class='bx bx-plus'></i></div>
+                        <input type="text" id="todoInput" class="notion-input" placeholder="Add a new task...">
+                    </div>
+                    <div class="input-options">
+                        <div class="input-option">
+                            <span class="option-label">Priority:</span>
+                            <select id="priorityInput" class="notion-select" aria-label="Priority">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <div class="input-option">
+                            <span class="option-label">Due:</span>
+                            <input type="date" id="dueDateInput" class="notion-input date" aria-label="Due date">
+                        </div>
+                        <div class="input-option">
+                            <span class="option-label">Goal:</span>
+                            <select id="goalSelect" class="notion-select" aria-label="Link to Goal">
+                                <option value="">None</option>
+                                <!-- Goal options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        <button id="addButton" type="button" class="notion-button primary">Add Task</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rich Text Editor for Task Details -->
+            <div id="editor-container" class="notion-block editor-block" style="display:none;">
+                <div class="editor-header">
+                    <span class="editor-title">Task Details</span>
+                </div>
+                <div id="quill-editor"></div>
+                <div class="editor-actions">
+                    <button id="saveAsTemplateButton" class="notion-button secondary">Save as Template</button>
+                    <button id="cancel-edit" class="notion-button secondary">Cancel</button>
+                    <button id="save-details" class="notion-button primary">Save</button>
+                </div>
+            </div>
+            
+            <!-- Main Content Views -->
+            <div class="notion-content-views">
+                <!-- List View (Default) -->
+                <div id="list-view" class="notion-view active">
+                    <ul id="todoList" class="notion-list">
+                        <!-- To-do items will be added here -->
+                    </ul>
+                </div>
+                
+                <!-- Kanban Board View -->
+                <div id="kanban-container" class="notion-view kanban-view">
+                    <div id="kanban-board-wrapper" class="kanban-board"></div>
+                </div>
+                
+                <!-- Calendar View -->
+                <div id="calendar-container" class="notion-view calendar-view"></div>
+                
+                <!-- Templates View -->
+                <div id="templates-container" class="notion-view templates-view">
+                    <div class="notion-page-header">
+                        <h2>Task Templates</h2>
+                    </div>
+                    <ul id="templatesList" class="notion-list templates-list">
+                        <!-- Template items will be rendered here by JavaScript -->
+                    </ul>
+                </div>
+                
+                <!-- Goals View -->
+                <div id="goals-container" class="notion-view goals-view">
+                    <div class="notion-page-header">
+                        <h2>My Goals</h2>
+                    </div>
+                    <div class="notion-block input-block">
+                        <div class="goal-input-form">
+                            <input type="text" id="goalNameInput" class="notion-input" placeholder="Goal Name" aria-label="Goal Name">
+                            <input type="text" id="goalDescriptionInput" class="notion-input" placeholder="Description (Optional)" aria-label="Goal Description">
+                            <input type="date" id="goalTargetDateInput" class="notion-input date" aria-label="Target Date (Optional)">
+                            <input type="text" id="goalMetricsInput" class="notion-input" placeholder="Metrics (Optional)" aria-label="Goal Metrics">
+                            <button id="addGoalButton" type="button" class="notion-button primary">Add Goal</button>
+                        </div>
+                    </div>
+                    <ul id="goalsList" class="notion-list goals-list">
+                        <!-- Goal items will be rendered here by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Authentication Forms Container -->
+    <div id="auth-container" class="auth-container hidden">
+        <div id="auth-logo">
+            <i class='bx bx-task'></i>
+            <h1>Notion-Style Todo App</h1>
+        </div>
+        
+        <div id="signup-form" class="auth-form">
+            <h2>Create your account</h2>
+            <div class="social-auth-buttons">
+                <button id="google-signup" class="social-auth-btn google">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo">
+                    <span>Continue with Google</span>
+                </button>
+                <button id="github-signup" class="social-auth-btn github">
+                    <i class='bx bxl-github'></i>
+                    <span>Continue with GitHub</span>
+                </button>
+            </div>
+            <div class="auth-divider">
+                <span>or</span>
+            </div>
+            <div class="input-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" class="notion-input" placeholder="you@example.com" required>
+                <div id="signup-email-error" class="input-error"></div>
+            </div>
+            <div class="input-group">
+                <label for="signup-password">Password</label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="signup-password" class="notion-input" placeholder="Minimum 8 characters" required>
+                    <button type="button" class="password-toggle"><i class='bx bx-hide'></i></button>
+                </div>
+                <div id="signup-password-error" class="input-error"></div>
+                <div class="password-strength">
+                    <div class="strength-meter">
+                        <div class="strength-meter-fill" id="password-strength-meter"></div>
+                    </div>
+                    <div class="strength-text" id="password-strength-text">Password strength</div>
+                </div>
+            </div>
+            <div class="auth-terms">
+                By signing up, you agree to our <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a>.
+            </div>
+            <button id="signup-button" type="submit" class="notion-button primary">Create Account</button>
+            <p class="auth-alternative">Already have an account? <a href="#" id="show-signin">Sign In</a></p>
+        </div>
+
+        <div id="signin-form" class="auth-form hidden">
+            <h2>Welcome back</h2>
+            <div class="social-auth-buttons">
+                <button id="google-signin" class="social-auth-btn google">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo">
+                    <span>Continue with Google</span>
+                </button>
+                <button id="github-signin" class="social-auth-btn github">
+                    <i class='bx bxl-github'></i>
+                    <span>Continue with GitHub</span>
+                </button>
+            </div>
+            <div class="auth-divider">
+                <span>or</span>
+            </div>
+            <div class="input-group">
+                <label for="signin-email">Email</label>
+                <input type="email" id="signin-email" class="notion-input" placeholder="you@example.com" required>
+                <div id="signin-email-error" class="input-error"></div>
+            </div>
+            <div class="input-group">
+                <label for="signin-password">Password</label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="signin-password" class="notion-input" placeholder="Your password" required>
+                    <button type="button" class="password-toggle"><i class='bx bx-hide'></i></button>
+                </div>
+                <div id="signin-password-error" class="input-error"></div>
+            </div>
+            <div class="signin-options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" class="notion-checkbox">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <a href="#" id="forgot-password" class="forgot-password">Forgot password?</a>
+            </div>
+            <button id="signin-button" type="submit" class="notion-button primary">Sign In</button>
+            <p class="auth-alternative">Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+        </div>
+        
+        <div id="reset-password-form" class="auth-form hidden">
+            <h2>Reset your password</h2>
+            <p class="form-description">Enter your email address and we'll send you a link to reset your password.</p>
+            <div class="input-group">
+                <label for="reset-email">Email</label>
+                <input type="email" id="reset-email" class="notion-input" placeholder="you@example.com" required>
+                <div id="reset-email-error" class="input-error"></div>
+            </div>
+            <button id="reset-button" type="submit" class="notion-button primary">Send Reset Link</button>
+            <p class="auth-alternative"><a href="#" id="back-to-signin">Back to Sign In</a></p>
+        </div>
+        
+        <div id="auth-message" class="auth-message hidden">
+            <div class="message-icon success hidden"><i class='bx bx-check-circle'></i></div>
+            <div class="message-icon error hidden"><i class='bx bx-error-circle'></i></div>
+            <div class="message-content">
+                <h3 id="message-title"></h3>
+                <p id="message-text"></p>
+            </div>
+            <button id="message-close" class="message-close"><i class='bx bx-x'></i></button>
+        </div>
+    </div>
+
+    <!-- User Profile Settings Modal -->
+    <div id="profile-settings-modal" class="modal">
+        <div class="modal-content">
+            <h2>User Profile Settings</h2>
+            <div class="input-group">
+                <label for="display-name-input">Display Name</label>
+                <input type="text" id="display-name-input" class="notion-input" placeholder="Your display name">
+            </div>
+            <div class="input-group">
+                <label for="new-password-input">New Password</label>
+                <input type="password" id="new-password-input" class="notion-input" placeholder="Enter new password">
+            </div>
+            <div class="input-group">
+                <label for="confirm-password-input">Confirm New Password</label>
+                <input type="password" id="confirm-password-input" class="notion-input" placeholder="Confirm new password">
+            </div>
+            <div class="modal-actions">
+                <button id="save-profile-changes" class="notion-button primary">Save Changes</button>
+                <button id="cancel-profile-changes" class="notion-button secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quill.js -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <!-- SortableJS for drag-and-drop -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+    <!-- FullCalendar -->
+    <script src='https://unpkg.com/fullcalendar@6.1.8/index.global.min.js'></script>
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
