@@ -122,7 +122,8 @@ Task-Manager/
 │   ├── Checklist.md            # Project checklist
 │   └── user-profile-references.txt
 ├── netlify/functions/          # Netlify serverless functions (optional)
-├── server.js                   # Express backend for AI suggestions
+├── server/                      # Express backend for AI suggestions
+│   └── index.js
 ├── netlify.toml                # Netlify deployment configuration
 ├── package.json                # Dependencies & scripts
 ├── .env.example                # Environment variable template
