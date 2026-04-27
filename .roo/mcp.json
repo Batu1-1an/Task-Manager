@@ -7,7 +7,7 @@
         "firecrawl-mcp"
       ],
       "env": {
-        "FIRECRAWL_API_KEY": "fc-995db1f092d1430186271463ecda3403"
+        "FIRECRAWL_API_KEY": "YOUR_FIRECRAWL_API_KEY_HERE"
       }
     },
     "sequential-thinking": {
